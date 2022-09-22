@@ -1,6 +1,13 @@
 .body {
   background-color: black;
 }
+select{
+  background-color: white;
+}
+input{
+  background-color: white;
+}
+
 .linkPage {
   padding: 20px;
   border: 1px solid black;
@@ -34,6 +41,7 @@
 
 .navBar {
   display: flex;
+  margin: 2vh 0 1vh 0;
 }
 
 .creaPerfil {
@@ -150,4 +158,35 @@
 .pregunta {
   color: aliceblue;
   margin-left: 50px;
+}
+
+@media (max-width: 600px) {
+  *{
+    line-height: 0.8em;
+  }
+  .navBar {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .creaPerfil {
+    margin-left: 0;
+    margin-right: 0;
+    align-self: right;
+  }
+  .proMember {
+    align-self: left;
+  }
+  .imgNirvana {
+    display:none; 
+  }
+  form{
+    width: 90vw !important;
+  }
+  input{
+    width: 90vw !important;
+    /* width: 88vw !important; */
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
 }
