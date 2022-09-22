@@ -1,0 +1,2 @@
+En terminal navegar server y client y en cada una hacer clean install de los node_modules con
+npm ci
