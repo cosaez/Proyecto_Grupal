@@ -10,9 +10,6 @@ const MusicoSchema = mongoose.Schema ({
         type: String,
         require:[true, 'Email es requerido']
     },
-    img: {
-        type: String   
-    },
     numero: {
         type: Number,
         require:[true, 'Numero telefonico es requerido']
@@ -29,11 +26,6 @@ const MusicoSchema = mongoose.Schema ({
         type: String,
         require:[true]
     },
-    status: {
-        type: String,
-        require:[true],
-        default:''
-    }
 }, {timestamps: true})
 
 
