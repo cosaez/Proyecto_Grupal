@@ -3,7 +3,6 @@ const Musico = require('../models/musico.model');
 module.exports.crearMusico = (req, res) => {
     Musico.create(req.body)
     .then( resp => {
-        console.log(req.body)
         res.json({
             datos: resp,
             error: false
@@ -19,7 +18,6 @@ module.exports.crearMusico = (req, res) => {
 module.exports.getMusico = (req, res) => {
     Musico.find({especialidad: req.params.especialidad})
     .then(resp => {
-        console.log(resp);
         res.json({
             datos: resp,
             error: false
@@ -73,4 +71,9 @@ module.exports.verMusico = (req, res) => {
             mensaje: 'Ha ocurrido un error'
         })
     })
+}
+
+module.exports.uploadFile = (req, res, next) => {
+    console.log(req.file);
+    res.json({error:false})
 }
