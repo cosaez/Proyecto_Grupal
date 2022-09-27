@@ -1,4 +1,5 @@
 const Musico = require('../models/musico.model');
+const  fs  = require('fs');
 
 module.exports.crearMusico = (req, res) => {
     Musico.create(req.body)
@@ -73,7 +74,34 @@ module.exports.verMusico = (req, res) => {
     })
 }
 
+module.exports.editarMusico = (req, res) => {
+    console.log(req.params.id);
+    console.log(req.body);
+    Musico.findByIdAndUpdate( req.params.id, req.body/* { runValidators: true } */)
+    .then(resp => {
+        res.json({
+            datos: resp,
+            error: false
+        })
+    }).catch (e => {
+        console.log(e)
+        res.json({
+            error: true,
+            mensaje: 'Ha ocurrido un error al actualizar'
+        })
+    })
+}
+
 module.exports.uploadFile = (req, res, next) => {
     console.log(req.file);
+
+    const path = global._basedir + '/' + req.file.path;
+    fs.readFile(path, 'utf-8', (err, data) => {
+        if(err) {
+            res.json({error: true, mensaje: 'Error al leer archivo'})
+        } else {
+            console.log(data);
+        }
+    })
     res.json({error:false})
 }

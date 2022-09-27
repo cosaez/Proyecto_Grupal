@@ -17,6 +17,8 @@ function App() {
 
   const navigate = useNavigate();
 
+  const [datos, setDatos] = useState([]);
+
   const [usuario, setUsuario] = useState();
 
   useEffect(() => {
@@ -43,6 +45,7 @@ function App() {
           <Route path='/instrumentos/:especialidad' element={<Instrumentos/>}></Route>
           <Route path='/musico/:id' element={<VerPerfil />}></Route>
           <Route path='/contacto' element={<Contacto/>}></Route>
+          <Route path='/editar/:id' element={<CreaPerfil />}></Route>
         </Routes>
       </Container>
     </UserContext.Provider>

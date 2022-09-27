@@ -26,6 +26,10 @@ const MusicoSchema = mongoose.Schema ({
         type: String,
         require:[true]
     },
+    usuario: {
+        type: mongoose.Schema.Types.ObjectId, 
+        require: [true]
+    }
 }, {timestamps: true})
 
 
