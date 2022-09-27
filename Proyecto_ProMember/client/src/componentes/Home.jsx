@@ -13,6 +13,9 @@ import { GiFireSilhouette } from 'react-icons/gi'
 import Intro from './Intro'
 import '../App.css';
 import React, { useState } from 'react';
+import { useContext } from "react";
+import context from "react-bootstrap/esm/AccordionContext";
+import UserContext from "./contexto/UserContext";
 
 
 
@@ -25,12 +28,15 @@ const Home = () => {
         navigate('/login')
     }
 
+    const {usuario} = useContext(UserContext)
+    console.log(usuario);
+
     return (
         <div className="allHome">
-
             <Container className='containerHome'>
                 <div className="navBar">
                     <h1 className='proMember'><GiFireSilhouette /> Pro Member</h1>
+                    
                     <Link className="creaPerfil" to="/perfil"><p>Crea tu Perfil de Musico !!</p></Link>
                     <Button className='btn btn-danger' id="btnClose" onClick={salir}>Cerrar Sesión</Button>
                 </div>

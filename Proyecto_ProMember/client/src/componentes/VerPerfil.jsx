@@ -4,6 +4,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Button, Container } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import {GiFireSilhouette} from 'react-icons/gi'
+import { useContext } from "react";
+import UserContext from "./contexto/UserContext";
 
 const VerPerfil = () => {
 
@@ -43,13 +45,17 @@ const VerPerfil = () => {
         })
     } */
 
+    const {usuario} = useContext(UserContext);
+
     return(
         <Container> 
 
-        <h1 className='proMember'><GiFireSilhouette/>Pro Member</h1> <hr className="aliceBlue" /> <br /> <br />
+        <h1 className='proMember'><GiFireSilhouette/>Pro Member</h1> <hr className="aliceBlue" />      <br /> <br />
             <div className="aliceBlue">
+                {usuario && usuario._id == p.usuario ? 
+                <Link to={`/editar/${p._id}`}><h3> Editar Perfil</h3> </Link> : '' }    <br /><br /><br />
                 <h2>{p.nombre}</h2> <br/>
-                <img src={p.img} alt='profilPic' />
+                <img src={p.img} alt='profilPic' /> 
                 {/* <Button onClick={() => adoptarMusic()}>A</Button> */}
 
             </div> <br/>

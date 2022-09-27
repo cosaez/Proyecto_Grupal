@@ -6,13 +6,7 @@ const port = 8000;
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-
-/* app.post('/profile', upload.single('avatar'), function (req, res, next) {
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
-}); */
-
-
+global._basedir = __dirname;
 
 app.use(cookieParser()); 
 app.use(cors({credentials: true, origin: 'http://localhost:3000'})); 

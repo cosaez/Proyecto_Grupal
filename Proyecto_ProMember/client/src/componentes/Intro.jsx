@@ -20,4 +20,4 @@ const Intro = props => {
         </React.Fragment>
     )
 }
-export default Intro
+export default Intro;
