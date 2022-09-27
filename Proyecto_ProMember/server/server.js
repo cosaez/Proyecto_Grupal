@@ -18,5 +18,6 @@ require('./config/mongoose.config');
 
 require('./routes/usuario.route')(app);
 require('./routes/musico.route')(app, upload);
+require('./routes/instrumento.routes')(app);
 
 app.listen(port, () => console.log('Servidor en puerto ' + port));
