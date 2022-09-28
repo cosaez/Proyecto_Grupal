@@ -24,12 +24,14 @@ const CreaPerfil = () => {
         descripcion:'',
         especialidad:'',
         rol:'',
-        usuario: usuario._id
+        /* usuario: usuario._id */
     }
 
     const [formulario, setFormulario] = useState(dataInicial);
 
     const [editar, setEditar] = useState(false);
+
+    const [uploadedFile, setUploadedFile] = useState([]); 
 
     const [selectedIMG, setSelectedIMG] = useState(null);
 
@@ -40,9 +42,9 @@ const CreaPerfil = () => {
     
 
     
-    useEffect(() => {
+    /* useEffect(() => {
         setFormulario({...formulario, ['usuario']: usuario._id})
-    },[])
+    },[]) */
 
 
 
@@ -72,7 +74,12 @@ const CreaPerfil = () => {
     
         console.log(selectedIMG);
     
-        axios.post('/api/member/upload', formData, {headers : {'content-type': 'multipart/form-data'}});
+        axios.post('/api/member/upload', formData, {headers : {'content-type': 'multipart/form-data'}})
+        .then(resp => {
+            console.log(resp.data);
+        } );
+
+
         axios.post('/api/member/crear', formulario)
         .then(resp => {
             if(!resp.data.error) {
@@ -107,6 +114,29 @@ const CreaPerfil = () => {
         
     }
 
+   const fileUpload = (e) => {
+    e.preventDefault();
+        const formData = new FormData();
+    
+        formData.append(
+            "archivo",
+            selectedIMG,
+            selectedIMG.name
+        );
+    
+        axios.post('/api/member/upload', formData, {responseType:'blob', headers : {'content-type': 'multipart/form-data'}})
+        .then(resp => {
+            console.log(resp.data);
+
+            const reader = new FileReader();
+            reader.readAsDataURL(new Blob([resp.data]));
+            reader.onloadend = () => {
+                console.log(reader.result);
+                setUploadedFile(reader.result)
+            }
+        } );
+    }
+ 
 
 
 
@@ -153,6 +183,7 @@ const CreaPerfil = () => {
                 <FormGroup className="formPerfil">
                     <FormLabel>Elija una Imagen para su Perfil</FormLabel>
                     <FormControl  type='file'  accept="image/*" onChange={selectedFile}/> <br />
+                    <Button onClick={fileUpload}>Enviar Foto</Button>
                 </FormGroup> <br /> <br />
                 
 

@@ -96,12 +96,18 @@ module.exports.uploadFile = (req, res, next) => {
     console.log(req.file);
 
     const path = global._basedir + '/' + req.file.path;
-    fs.readFile(path, 'utf-8', (err, data) => {
+    res.download(path, req.file.path);
+    /* fs.readFile(path, 'utf-8', (err, data) => {
         if(err) {
             res.json({error: true, mensaje: 'Error al leer archivo'})
         } else {
-            console.log(data);
+            res.writeHead(200, {
+                'Content-Type': req.file.mimetype,
+                'Content-Disposition': 'attachment;filename=' + req.file.originalname,
+                'Content-Length': data.length
+            });
+            res.end(Buffer.from(data, 'binary'))
         }
-    })
+    }) */
     res.json({error:false})
 }
