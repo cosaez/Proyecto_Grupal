@@ -17,7 +17,7 @@ module.exports.registrar = (req, res) => {
         console.log(e);
         res.json({
             error: true,
-            mensaje: 'Ha ocurrido un error'
+            mensaje: 'Ha ocurrido un error, intente otra vez'
         })
     })
 }
