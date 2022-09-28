@@ -1,16 +1,22 @@
 import { useEffect } from "react";
 import { Container, ListGroup, Button } from "react-bootstrap";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import {GiFireSilhouette} from 'react-icons/gi'
+import Swal from 'sweetalert2';
 
 
-const Instrumentos = () => {
+
+const Instrumentos = ({datos, setDatos}) => {
 
     const [nuevaEspecialidad, setNuevaEpecialidad] = useState([]);
 
     const {especialidad} = useParams();
+
+    const navigate = useNavigate();
+
+    const {id} = useParams();
 
     useEffect(() => {
         axios.get(`/api/member/listar/${especialidad}`)
@@ -20,13 +26,14 @@ const Instrumentos = () => {
         })
     }, []);
 
+
     return(
         <Container>
             <h1 className='proMember'><GiFireSilhouette/>Pro Member</h1>
             <hr className="aliceBlue" /> <br />
             <h3 className="aliceBlue"> Categoría: {especialidad}</h3> <br /><br />
             {nuevaEspecialidad.map((p,i) => (
-
+                
                 <ListGroup key={i}>
                     <ul className="listaGen">
                         <li>

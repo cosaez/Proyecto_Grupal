@@ -24,7 +24,7 @@ const CreaPerfil = () => {
         descripcion:'',
         especialidad:'',
         rol:'',
-        /* usuario: usuario._id */
+        usuario: usuario._id
     }
 
     const [formulario, setFormulario] = useState(dataInicial);
@@ -42,11 +42,22 @@ const CreaPerfil = () => {
     
 
     
-    /* useEffect(() => {
+    useEffect(() => {
         setFormulario({...formulario, ['usuario']: usuario._id})
-    },[]) */
+    },[])
 
-
+    useEffect(() => {
+        if(id) {
+            axios.get(`/api/member/verperfil/${id}`)
+            .then(resp => {
+                if(!resp.data.error) {
+                    setFormulario(resp.data.datos);
+                } else {
+                    Swal.fire('Oooops!!', resp.data.mensaje,'Error')
+                }
+            })
+        }
+    }, []);
 
     const actualizaForm = ({target: {name, value}}) => {
         setFormulario({

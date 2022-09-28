@@ -2,6 +2,7 @@ const Musico = require('../models/musico.model');
 const  fs  = require('fs');
 
 module.exports.crearMusico = (req, res) => {
+    console.log(req.body)
     Musico.create(req.body)
     .then( resp => {
         res.json({

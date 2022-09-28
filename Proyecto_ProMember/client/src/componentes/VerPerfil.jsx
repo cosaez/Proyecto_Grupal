@@ -23,7 +23,7 @@ const VerPerfil = () => {
         })
     }, [])
 
-    /* const adoptarMusic = () => {
+    const eliminarMusic = () => {
         Swal.fire({
             text: `¿Esta seguro de adoptar y cuidar esta mascota?`,
             title: 'Contactar',
@@ -36,27 +36,28 @@ const VerPerfil = () => {
                 axios.delete(`/api/member/eliminar/${id}`)
                 .then(respuesta => {
                     if(!respuesta.data.error) {
-                        navigate('/');
+                        navigate('/instrumentos/Percusión');
                     } else {
                         Swal.fire('Error', respuesta.data.mensaje,'error')
                     }
                 })
             }
         })
-    } */
+    }
+    
 
     const {usuario} = useContext(UserContext);
+    console.log(usuario)
 
     return(
         <Container> 
 
         <h1 className='proMember'><GiFireSilhouette/>Pro Member</h1> <hr className="aliceBlue" />      <br /> <br />
             <div className="aliceBlue">
-                {usuario && usuario._id == p.usuario ? 
-                <Link to={`/editar/${p._id}`}><h3> Editar Perfil</h3> </Link> : '' }    <br /><br /><br />
+                
+
                 <h2>{p.nombre}</h2> <br/>
                 <img src={p.img} alt='profilPic' /> 
-                {/* <Button onClick={() => adoptarMusic()}>A</Button> */}
 
             </div> <br/>
             <div className="aliceBlue">
@@ -79,8 +80,15 @@ const VerPerfil = () => {
                     <strong>Descripcion:</strong> 
                     <p className="details3">{p.descripcion}</p>
                 </div> <br />
+                {usuario._id == p.usuario ? '' :
+                <Link className="contacto" to='/contacto'>Contactar</Link>}
 
-                <Link className="contacto" to='/contacto'>Contactar</Link>
+                {usuario._id == p.usuario ?
+                    
+                    [<Link className="editarLinkEdit"  to={`/editar/${p._id}`}><h3 className="editar"> Editar Perfil</h3> </Link> ,
+                    <Button style={{backgroundColor:'red'}} onClick={() => eliminarMusic()}>Eliminar Perfil</Button>]
+                    
+                    : '' }    
 
             </div>
             <br/><br/>
