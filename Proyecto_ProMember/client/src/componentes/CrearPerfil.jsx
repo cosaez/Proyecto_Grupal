@@ -9,22 +9,19 @@ import UserContext from "./contexto/UserContext";
 import { useEffect } from "react";
 
 
-
-
-
 const CreaPerfil = () => {
 
-    const {usuario} = useContext(UserContext);
+    const {usuario, setUsuario} = useContext(UserContext);
 
     const dataInicial = {
-        img:'',
         nombre:'',
         email:'',
         numero:'',
         descripcion:'',
         especialidad:'',
         rol:'',
-        /* usuario: usuario._id */
+        usuario: usuario._id,
+        avatar:''
     }
 
     const [formulario, setFormulario] = useState(dataInicial);
@@ -42,11 +39,22 @@ const CreaPerfil = () => {
     
 
     
-    /* useEffect(() => {
+    useEffect(() => {
         setFormulario({...formulario, ['usuario']: usuario._id})
-    },[]) */
+    },[])
 
-
+    useEffect(() => {
+        if(id) {
+            axios.get(`/api/member/verperfil/${id}`)
+            .then(resp => {
+                if(!resp.data.error) {
+                    setFormulario(resp.data.datos);
+                } else {
+                    Swal.fire('Oooops!!', resp.data.mensaje,'Error')
+                }
+            })
+        }
+    }, []);
 
     const actualizaForm = ({target: {name, value}}) => {
         setFormulario({
@@ -69,20 +77,21 @@ const CreaPerfil = () => {
         formData.append(
             "archivo",
             selectedIMG,
-            selectedIMG.name
-        );
+            selectedIMG.name)
+        
     
         console.log(selectedIMG);
     
-        axios.post('/api/member/upload', formData, {headers : {'content-type': 'multipart/form-data'}})
+        axios.post('/api/member/upload', formData, {responseType:'blob', headers : {'content-type': 'multipart/form-data'}})
         .then(resp => {
             console.log(resp.data);
         } );
 
 
-        axios.post('/api/member/crear', formulario)
+        return axios.post('/api/member/crear', formulario/* , {responseType:'blob', headers: {'content-type':'multipart/form-data'}} */)
         .then(resp => {
             if(!resp.data.error) {
+                setUsuario({...usuario, ['musico']: true})
                 navigate('/');
             } else {
                 Swal.fire('Error', resp.data.mensaje,'error')
@@ -105,6 +114,9 @@ const CreaPerfil = () => {
     const guardar = async (e) => {
         e.preventDefault();
         let respuesta = false;
+        const formData = new FormData(e.target);
+        
+        console.log('target',e.target);
         if(!id) {
             respuesta = await crearMusico(formulario);
         } else {
@@ -114,7 +126,7 @@ const CreaPerfil = () => {
         
     }
 
-   const fileUpload = (e) => {
+    /* const fileUpload = (e) => {
     e.preventDefault();
         const formData = new FormData();
     
@@ -131,12 +143,12 @@ const CreaPerfil = () => {
             const reader = new FileReader();
             reader.readAsDataURL(new Blob([resp.data]));
             reader.onloadend = () => {
-                console.log(reader.result);
+                console.log(uploadedFile);
                 setUploadedFile(reader.result)
-            }
+            };
         } );
     }
- 
+ */
 
 
 
@@ -182,9 +194,10 @@ const CreaPerfil = () => {
                 </Form.Select> <br /> <br /> <br />
                 <FormGroup className="formPerfil">
                     <FormLabel>Elija una Imagen para su Perfil</FormLabel>
-                    <FormControl  type='file'  accept="image/*" onChange={selectedFile}/> <br />
-                    <Button onClick={fileUpload}>Enviar Foto</Button>
+                    <FormControl  type='file' name='avatar'  accept="image/*" onChange={selectedFile}/> <br />
+                    {/* <Button onClick={fileUpload}>Enviar Foto</Button> */}
                 </FormGroup> <br /> <br />
+                {/* <img src={uploadedFile}></img> */}
                 
 
                 <Button type="submit"> Subir Datos </Button>

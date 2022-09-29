@@ -19,7 +19,8 @@ const UsuarioSchema = new mongoose.Schema({
         type: String,
         required: [true, "Debe ingresar contraseña"],
         minlength: [6, "La contraseña debe tener minimo 6 caracteres"]
-    }
+    },
+    musico: {type: Boolean, default: false}
 }, {timestamps: true});
 
 

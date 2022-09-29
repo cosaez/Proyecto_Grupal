@@ -1,13 +1,30 @@
 const Musico = require('../models/musico.model');
+const Usuario = require('../models/usuario.model');
 const  fs  = require('fs');
+const { secretKey } = require('../config/jwt.config');
+const  jwt  = require('jsonwebtoken');
 
-module.exports.crearMusico = (req, res) => {
+module.exports.crearMusico = (req, res, next) => {
+    /* console.log('req.body',req.body);
+    console.log('req.file',req.file);
+    const path = global._basedir + '/' + req.file.path;
+    req.body.avatar = path;
+    console.log('avatar:', avatar); */
     Musico.create(req.body)
     .then( resp => {
-        res.json({
-            datos: resp,
-            error: false
-        })
+        jwt.verify(req.cookies.usertoken, secretKey, (err, payload) => {
+            if (err) { 
+            res.status(401).json({verified: false});
+            } else {
+                Usuario.findByIdAndUpdate(payload._id, {
+                    musico: true
+                }).then( resp => {
+                    res.json({
+                        error: false
+                    })
+                })
+            }
+        });
     }).catch( e => {
         res.json({
             error: true,
@@ -77,7 +94,7 @@ module.exports.verMusico = (req, res) => {
 module.exports.editarMusico = (req, res) => {
     console.log(req.params.id);
     console.log(req.body);
-    Musico.findByIdAndUpdate( req.params.id, req.body/* { runValidators: true } */)
+    Musico.findByIdAndUpdate( req.params.id, req.body, { runValidators: true })
     .then(resp => {
         res.json({
             datos: resp,
@@ -92,22 +109,19 @@ module.exports.editarMusico = (req, res) => {
     })
 }
 
+module.exports.avatar = (req, res) => {
+    Musico.findById(req.params.id)
+    .then(resp => {
+        if(resp?.avatar) {
+            res.download(resp.avatar);
+        }
+    })
+}
+
 module.exports.uploadFile = (req, res, next) => {
     console.log(req.file);
 
     const path = global._basedir + '/' + req.file.path;
     res.download(path, req.file.path);
-    /* fs.readFile(path, 'utf-8', (err, data) => {
-        if(err) {
-            res.json({error: true, mensaje: 'Error al leer archivo'})
-        } else {
-            res.writeHead(200, {
-                'Content-Type': req.file.mimetype,
-                'Content-Disposition': 'attachment;filename=' + req.file.originalname,
-                'Content-Length': data.length
-            });
-            res.end(Buffer.from(data, 'binary'))
-        }
-    }) */
-    res.json({error:false})
+    fs.rm(path, (err) => console.log(err));
 }
