@@ -50,7 +50,6 @@ function App() {
           <Route path='/anuncios/' element={<Anuncios />}></Route>
           <Route path='/nuevo_anuncio/' element={<CreaAnuncio />}></Route>
           <Route path='/editar/:id' element={<CreaPerfil datos={datos} setDatos={setDatos} />}></Route>
-
         </Routes>
       </Container>
     </UserContext.Provider>

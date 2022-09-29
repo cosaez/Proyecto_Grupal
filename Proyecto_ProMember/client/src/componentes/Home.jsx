@@ -28,7 +28,7 @@ const Home = () => {
         navigate('/login')
     }
 
-    const {usuario} = useContext(UserContext)
+    const { usuario } = useContext(UserContext)
 
 
     return (
@@ -36,11 +36,11 @@ const Home = () => {
             <Container className='containerHome'>
                 <div className="navBar">
                     <h1 className='proMember'><GiFireSilhouette /> Pro Member</h1>
-                    {usuario.musico == true  ? '' : <Link className="creaPerfil" to="/perfil"><p>Crea tu Perfil de Musico !!</p></Link>}
+                    {usuario.musico == true ? '' : <Link className="creaPerfil" to="/perfil"><p>Crea tu Perfil de Musico !!</p></Link>}
                     <Button className='btn btn-danger' id="btnClose" onClick={salir}>Cerrar Sesión</Button>
                 </div>
                 <hr className="aliceBlue" /> <br /> <br />
-                <Button className="intro-btn" onClick={() => setShow(true)}>Sobre el sitio</Button>
+                
                 <Intro onClose={() => setShow(false)} show={show} />
                 <div className="intro-responsive">
                     <h2 className="pregunta">¿En que consiste?</h2> <br /> <br />
@@ -49,7 +49,10 @@ const Home = () => {
                         <img className="imgBand" src={require("./imgs/5-20-22-Radial-Snarky-Pup-726x483.jpg")} alt="bandImg" />
                     </div> <br /><br /><br /><br />
                 </div>
-
+                <div className="intro-anuncios">
+                    <Button className="intro-btn" onClick={() => setShow(true)}>Sobre el sitio</Button>
+                    <Link to='/anuncios'><Button className="anuncio-btn">Necesitas instrumentos? Revisa nuestros anuncios</Button></Link>
+                </div>
                 <h2 className="aliceBlue">¿Que integrante estás buscando?</h2> <br /> <br />
 
                 <Row className="linksTo">
@@ -87,7 +90,6 @@ const Home = () => {
                         <Link to='/instrumentos/Productor' className="link"><p style={{ backgroundColor: "#3682" }} className="linkPage">Productor <CgMusicSpeaker className="icons" /></p ></Link>
                     </Col>
                 </Row> <br /><br />
-
             </Container>
 
 

@@ -18,7 +18,6 @@ const Anuncios = () => {
             .catch((err) => {
                 console.log(err)
             });
-        console.log(data)
     })
     return (
         <div>

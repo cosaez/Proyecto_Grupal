@@ -14,10 +14,18 @@ select {
 input {
   background-color: white;
 }
+
 .intro-btn{
   background-color: #23395B !important;
-  width: 100% !important;
+  width: 30vw !important;
   margin-bottom: 1em;
+  border: none !important;
+}
+.anuncio-btn{
+  background-color: #23395B !important;
+  width: 30vw !important;
+  margin-bottom: 1em;
+  border: none !important;
 }
 .opacity-float{
   position: fixed;
@@ -203,7 +211,14 @@ display: none;
   color: aliceblue;
   margin-left: 50px;
 }
-
+.intro-anuncios{
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  gap:2vw;
+  display: flex;
+  flex-wrap: wrap;
+}
 .wrap-anuncios{
   display: flex;
   flex-wrap: wrap;
@@ -277,6 +292,10 @@ display: none;
   }
   .descr{
     width: 92%;
+  }
+  .anuncio-btn{
+    width: 70vw !important;
+    border: none !important;
   }
   ::-webkit-scrollbar {
     width: 8px;
