@@ -27,6 +27,7 @@ const Anuncios = () => {
                 <Button className='btn btn-danger' id="btnClose" onClick={salir}>Cerrar Sesión</Button>
             </div>
             <hr className="aliceBlue" />
+            <Link to='/'>Volver al Inicio</Link> 
             <div className="wrap-anuncios">
                 {data.map((data) => {
                     return (
