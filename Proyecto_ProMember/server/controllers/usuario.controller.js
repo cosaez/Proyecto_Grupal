@@ -38,7 +38,8 @@ module.exports.login = (req, res) => {
                         _id: usuario._id,
                         nombre: usuario.nombre,
                         apellido: usuario.apellido,
-                        email: usuario.email
+                        email: usuario.email,
+                        musico: usuario.musico
                     }
                     const newJWT = jwt.sign(payload, secretKey)
                     res
@@ -49,7 +50,7 @@ module.exports.login = (req, res) => {
                 } else {
                     res.json({
                         error: true,
-                        mensaje: 'Usuario o Contraseña no valido'
+                        mensaje: 'Email o Contraseña no valido'
                     })
                 }
             })
