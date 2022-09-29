@@ -25,8 +25,8 @@ const VerPerfil = () => {
 
     const eliminarMusic = () => {
         Swal.fire({
-            text: `¿Esta seguro de adoptar y cuidar esta mascota?`,
-            title: 'Contactar',
+            text: `¿Está seguro que desea eliminar su perfil?`,
+            title: 'Eliminar',
             showCancelButton: true,
             confirmButtonText: 'Si',
             confirmButtonColor: 'danger',
@@ -84,9 +84,10 @@ const VerPerfil = () => {
                 <Link className="contacto" to='/contacto'>Contactar</Link>}
 
                 {usuario._id == p.usuario ?
-                    
-                    [<Link className="editarLinkEdit"  to={`/editar/${p._id}`}><h3 className="editar"> Editar Perfil</h3> </Link> ,
-                    <Button style={{backgroundColor:'red'}} onClick={() => eliminarMusic()}>Eliminar Perfil</Button>]
+                    <>
+                        <Link className="editarLinkEdit"  to={`/editar/${p._id}`}><h3 className="editar"> Editar Perfil</h3> </Link> 
+                        <Button style={{backgroundColor:'red'}} onClick={() => eliminarMusic()}>Eliminar Perfil</Button>
+                    </>
                     
                     : '' }    
 

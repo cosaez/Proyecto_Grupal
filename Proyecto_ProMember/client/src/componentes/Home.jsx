@@ -36,7 +36,7 @@ const Home = () => {
             <Container className='containerHome'>
                 <div className="navBar">
                     <h1 className='proMember'><GiFireSilhouette /> Pro Member</h1>
-                    <Link className="creaPerfil" to="/perfil"><p>Crea tu Perfil de Musico !!</p></Link>
+                    {usuario.musico == true  ? '' : <Link className="creaPerfil" to="/perfil"><p>Crea tu Perfil de Musico !!</p></Link>}
                     <Button className='btn btn-danger' id="btnClose" onClick={salir}>Cerrar Sesión</Button>
                 </div>
                 <hr className="aliceBlue" /> <br /> <br />

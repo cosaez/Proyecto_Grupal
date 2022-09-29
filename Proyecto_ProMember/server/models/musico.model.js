@@ -29,7 +29,8 @@ const MusicoSchema = mongoose.Schema ({
     usuario: {
         type: mongoose.Schema.Types.ObjectId, 
         require: [true]
-    }
+    },
+    avatar : String
 }, {timestamps: true})
 
 
