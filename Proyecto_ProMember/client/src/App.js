@@ -10,6 +10,8 @@ import CreaPerfil from './componentes/CrearPerfil';
 import VerPerfil from './componentes/VerPerfil';
 import Instrumentos from './componentes/instruments/Instrumentos';
 import Contacto from './componentes/Contacto';
+import Anuncios from './componentes/Anuncios';
+import CreaAnuncio from './componentes/CreaAnuncio';
 
 
 
@@ -45,7 +47,10 @@ function App() {
           <Route path='/instrumentos/:especialidad' element={<Instrumentos datos={datos} setDatos={setDatos}/>}></Route>
           <Route path='/musico/:id' element={<VerPerfil />}></Route>
           <Route path='/contacto' element={<Contacto/>}></Route>
+          <Route path='/anuncios/' element={<Anuncios />}></Route>
+          <Route path='/nuevo_anuncio/' element={<CreaAnuncio />}></Route>
           <Route path='/editar/:id' element={<CreaPerfil datos={datos} setDatos={setDatos} />}></Route>
+
         </Routes>
       </Container>
     </UserContext.Provider>

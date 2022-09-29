@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 const InstrumentoSchema = new mongoose.Schema({
-    announcement: {
+    anuncio: {
       type: String,
       required: [true, "Anuncio es requerido"],
       minlength: [5, "Anuncio debe ser al menos 5 caracteres"]
     },
-    name: {
+    nombre: {
       type: String,
       required: [true, "Name is required."],
       minlength: [2, "Nombre debe ser al menos 2 caracteres"]
