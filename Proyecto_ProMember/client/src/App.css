@@ -204,6 +204,30 @@ display: none;
   margin-left: 50px;
 }
 
+.wrap-anuncios{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2vw;
+}
+.contenedor-anuncio{
+  border: 1px solid #DDD8FE;
+  border-radius: 12px;
+}
+.lista-anuncio{
+  font-size: 12px !important;
+  max-width: 40vw;
+  list-style: none;
+  color: white; 
+  padding: 2vh 1vw 8px 1vw;
+}
+.align-derecha{
+  text-align: right; 
+}
+.form-anuncio{
+  color: white;
+}
+
 @media (max-width: 600px) {
   * {
     line-height: 0.8em;
